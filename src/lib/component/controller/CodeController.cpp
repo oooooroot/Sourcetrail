@@ -1296,7 +1296,8 @@ CodeScrollParams CodeController::firstReferenceScrollParams() const
 
 		return CodeScrollParams::toReference(
 			ref.filePath,
-			ref.scopeLocationId ? ref.scopeLocationId : ref.locationId,
+			ref.locationId,
+			ref.scopeLocationId,
 			CodeScrollParams::Target::TOP);
 	}
 
@@ -1313,7 +1314,7 @@ CodeScrollParams CodeController::definitionReferenceScrollParams(const std::vect
 			if (ref.scopeLocationId && ref.tokenId == activeTokenId)
 			{
 				return CodeScrollParams::toReference(
-					ref.filePath, ref.scopeLocationId, CodeScrollParams::Target::TOP);
+					ref.filePath, ref.locationId, ref.scopeLocationId, CodeScrollParams::Target::TOP);
 			}
 		}
 
@@ -1322,7 +1323,7 @@ CodeScrollParams CodeController::definitionReferenceScrollParams(const std::vect
 			if (ref.tokenId == activeTokenId)
 			{
 				return CodeScrollParams::toReference(
-					ref.filePath, ref.locationId, CodeScrollParams::Target::TOP);
+					ref.filePath, ref.locationId, ref.scopeLocationId, CodeScrollParams::Target::TOP);
 			}
 		}
 	}
@@ -1334,7 +1335,8 @@ CodeScrollParams CodeController::toReferenceScrollParams(const Reference& ref) c
 {
 	return CodeScrollParams::toReference(
 		ref.filePath,
-		ref.scopeLocationId ? ref.scopeLocationId : ref.locationId,
+		ref.locationId,
+		ref.scopeLocationId,
 		CodeScrollParams::Target::CENTER);
 }
 
